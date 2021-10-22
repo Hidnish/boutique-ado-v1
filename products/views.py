@@ -1,5 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Product
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib import messages
+# way to handle queries (check documentation)
+from django.db.models import Q
+from .models import Product, Category
 
 # Create your views here.
 
@@ -8,9 +11,34 @@ def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
     products = Product.objects.all()
+    query = None
+    categories = None
+
+    if request.GET:
+        if 'category' in request.GET:
+            categories = request.GET['category'].split(',')
+            # double underscore syntax (__name__) is common when making queries in django
+            # here you are looking for the name field of the category model
+            # cause category and product are related with FK
+            products = products.filter(category__name__in=categories)
+            # convert string in list of categories into category objects to
+            # be accessed in the template
+            categories = Category.objects.filter(name__in=categories)
+
+        if 'q' in request.GET:
+            query = request.GET['q']
+            if not query:
+                messages.error(request, 'You did not enter any search criteria!')
+                return redirect(reverse('products'))
+
+            # 'i' makes the queries case insensitive
+            queries = Q(name__contains=query) | Q(description__contains=query)
+            products = products.filter(queries)
 
     context = {
         'products': products,
+        'search_term': query,
+        'current_categories': categories,
     }
 
     return render(request, 'products/products.html', context)
