@@ -82,6 +82,9 @@ TEMPLATES = [
 ]
 
 # HIDEO add this
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+# HIDEO add this
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
