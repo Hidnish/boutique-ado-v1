@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'products',
     'bag',
     'checkout',
+
+    # Others
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +63,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'boutique_ado.urls'
+
+# HIDEO add this
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
@@ -76,8 +82,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',  # required by allauth
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media', # HIDEO add this
                 'bag.context.bag_contents', # HIDEO add this
             ],
+            # HIDEO add this
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
