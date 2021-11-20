@@ -40,7 +40,7 @@ class StripeWH_Handler:
                 shipping_details.address[field] = None
    
         order_exists = False
-        attempt = 1 
+        attempt = 1
         while attempt <= 5:
             try:
                 order = Order.objects.get(
