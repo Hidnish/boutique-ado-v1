@@ -183,6 +183,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 FREE_DELIVERY_THRESHOLD = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
 STRIPE_CURRENCY = 'usd'
+DEFAULT_FROM_EMAIL = 'botiqueado@example.com'
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 # keep secret key here !!
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
