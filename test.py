@@ -1,0 +1,3 @@
+def something():
+    print("hahaha")
+
