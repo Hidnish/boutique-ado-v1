@@ -1,3 +1,0 @@
-def something():
-    print("hahaha")
-
